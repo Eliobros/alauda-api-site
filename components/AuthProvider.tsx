@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loadUser = async (authToken: string) => {
     try {
       const response = await authApi.getMe(authToken);
-      setUser(response.user);
+      setUser(response.user as User);
     } catch (error) {
       console.error('Erro ao carregar usuário:', error);
       logout();
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await authApi.login({ email, password });
       setToken(response.token);
-      setUser(response.user);
+      setUser(response.user as User);
       localStorage.setItem('token', response.token);
     } catch (error) {
       throw error;
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await authApi.register({ name, email, password, phone });
       setToken(response.token);
-      setUser(response.user);
+      setUser(response.user as User);
       localStorage.setItem('token', response.token);
     } catch (error) {
       throw error;

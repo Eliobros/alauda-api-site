@@ -229,7 +229,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Links */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <Link
               href="/docs"
               className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition group"
@@ -241,21 +241,44 @@ export default function DashboardPage() {
             </Link>
             
             <Link
-              href="/dashboard/account"
+              href="/dashboard/payments"
               className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition group"
             >
               <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition">
-                ⚙️ Minha Conta
+                💳 Pagamentos
               </h3>
-              <p className="text-gray-400 text-sm">Gerencie suas informações</p>
+              <p className="text-gray-400 text-sm">Recarregue créditos</p>
             </Link>
-            
-            <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-white mb-2">
-                💬 Suporte
+
+            <Link
+              href="/dashboard/chat"
+              className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition group"
+            >
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition">
+                🤖 Tina AI
               </h3>
-              <p className="text-gray-400 text-sm">Entre em contato conosco</p>
-            </div>
+              <p className="text-gray-400 text-sm">Converse com a IA</p>
+            </Link>
+
+            <Link
+              href="/playground"
+              className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition group"
+            >
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition">
+                🧪 Playground
+              </h3>
+              <p className="text-gray-400 text-sm">Teste a API ao vivo</p>
+            </Link>
+
+            <Link
+              href="/status"
+              className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition group"
+            >
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition">
+                ⚡ Status
+              </h3>
+              <p className="text-gray-400 text-sm">Status dos serviços</p>
+            </Link>
           </div>
         </div>
       </div>

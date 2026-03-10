@@ -27,14 +27,32 @@ const navigation: NavSection[] = [
     ],
   },
   {
-    title: 'Endpoints',
+    title: 'Downloads',
     items: [
       { title: 'YouTube', href: '/docs/youtube', icon: '📺' },
       { title: 'Spotify', href: '/docs/spotify', icon: '🎵' },
       { title: 'Instagram', href: '/docs/instagram', icon: '📸' },
       { title: 'TikTok', href: '/docs/tiktok', icon: '🎬' },
+      { title: 'Facebook', href: '/docs/facebook', icon: '📘' },
+      { title: 'XVideos', href: '/docs/xvideos', icon: '🔞' },
+    ],
+  },
+  {
+    title: 'Serviços',
+    items: [
       { title: 'Shazam', href: '/docs/shazam', icon: '🎼' },
       { title: 'Remove BG', href: '/docs/removebg', icon: '🖼️' },
+      { title: 'Lyrics', href: '/docs/lyrics', icon: '🎤' },
+      { title: 'Vocal Remover', href: '/docs/vocalremover', icon: '🎵' },
+      { title: 'CPF', href: '/docs/cpf', icon: '🇧🇷' },
+      { title: 'Tina AI', href: '/docs/tina', icon: '🤖' },
+    ],
+  },
+  {
+    title: 'Integrações',
+    items: [
+      { title: 'WhatsApp', href: '/docs/whatsapp', icon: '💬' },
+      { title: 'Pagamentos', href: '/docs/payment', icon: '💳' },
     ],
   },
   {

@@ -74,6 +74,33 @@ export default function HomePage() {
               Remova fundos de imagens usando IA. Qualidade profissional em segundos.
             </p>
           </div>
+
+          {/* Feature 4 */}
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 hover:border-purple-500 transition">
+            <div className="text-4xl mb-4">💬</div>
+            <h3 className="text-xl font-semibold text-white mb-3">IA Conversacional</h3>
+            <p className="text-gray-400">
+              Converse com a Tina, nossa assistente de IA powered by Gemini. Conversas contextualizadas e inteligentes.
+            </p>
+          </div>
+
+          {/* Feature 5 */}
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 hover:border-purple-500 transition">
+            <div className="text-4xl mb-4">🎵</div>
+            <h3 className="text-xl font-semibold text-white mb-3">Separação de Áudio</h3>
+            <p className="text-gray-400">
+              Separe vocais e instrumentais de qualquer música usando IA. Até 5 stems diferentes.
+            </p>
+          </div>
+
+          {/* Feature 6 */}
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 hover:border-purple-500 transition">
+            <div className="text-4xl mb-4">💳</div>
+            <h3 className="text-xl font-semibold text-white mb-3">Pagamentos</h3>
+            <p className="text-gray-400">
+              Sistema integrado com M-Pesa, E-Mola e MercadoPago. Recarregue créditos facilmente.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -91,6 +118,14 @@ export default function HomePage() {
             { name: 'TikTok', icon: '🎬' },
             { name: 'Shazam', icon: '🎼' },
             { name: 'RemoveBG', icon: '🖼️' },
+            { name: 'Facebook', icon: '📘' },
+            { name: 'Lyrics', icon: '🎤' },
+            { name: 'CPF', icon: '🇧🇷' },
+            { name: 'Vocal Remover', icon: '🎵' },
+            { name: 'WhatsApp', icon: '💬' },
+            { name: 'Tina AI', icon: '🤖' },
+            { name: 'XVideos', icon: '🔞' },
+            { name: 'Payments', icon: '💳' },
           ].map((service) => (
             <div
               key={service.name}
@@ -161,6 +196,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Status da API */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/50 rounded-full">
+            <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="text-green-400 font-medium">API Online</span>
+          </div>
+          <p className="text-gray-400 mt-2 text-sm">Todos os serviços operacionais</p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div className="bg-gradient-to-r from-purple-900 to-blue-900 rounded-2xl p-12 border border-purple-500">
@@ -187,7 +233,7 @@ export default function HomePage() {
               <span className="font-semibold text-white">Alauda API</span> - Desenvolvido com 💜 em Moçambique
             </p>
             <p className="text-sm">
-              by Zëüs Lykraios 💎 | © 2024 Todos os direitos reservados
+              by Zëüs Lykraios 💎 | © 2025 Todos os direitos reservados
             </p>
           </div>
         </div>

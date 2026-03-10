@@ -35,6 +35,18 @@ export default function Header() {
             >
               Documentação
             </Link>
+            <Link
+              href="/playground"
+              className="text-gray-300 hover:text-white transition"
+            >
+              Playground
+            </Link>
+            <Link
+              href="/status"
+              className="text-gray-300 hover:text-white transition"
+            >
+              Status
+            </Link>
             {user ? (
               <>
                 <Link

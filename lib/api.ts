@@ -1,7 +1,7 @@
 // lib/api.ts
 // Cliente para comunicação com a API
 
-const API_BASE_URL = '';
+const API_BASE_URL = 'https://alauda-api.topazioverse.com.br';
 
 interface FetchOptions extends RequestInit {
   token?: string;
@@ -16,9 +16,9 @@ async function apiFetch<T>(
 ): Promise<T> {
   const { token, ...fetchOptions } = options;
 
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...fetchOptions.headers,
+    ...(fetchOptions.headers as Record<string, string>),
   };
 
   if (token) {
@@ -69,6 +69,9 @@ export interface AuthResponse {
     email: string;
     phone?: string;
     createdAt: string;
+    totalApiKeys?: number;
+    lastLogin?: string | null;
+    loginCount?: number;
   };
 }
 
@@ -248,6 +251,257 @@ export const keysApi = {
     };
   }> => {
     return apiFetch('/api/keys/stats/summary', { token });
+  },
+};
+
+// ===== FACEBOOK API =====
+
+export const facebookApi = {
+  download: async (token: string, url: string): Promise<any> => {
+    return apiFetch('/api/facebook/download', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ url }),
+    });
+  },
+
+  infoOnly: async (token: string, url: string): Promise<any> => {
+    return apiFetch('/api/facebook/info-only', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ url }),
+    });
+  },
+
+  batch: async (token: string, urls: string[]): Promise<any> => {
+    return apiFetch('/api/facebook/batch', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ urls }),
+    });
+  },
+};
+
+// ===== LYRICS API =====
+
+export const lyricsApi = {
+  search: async (token: string, artist: string, title: string): Promise<any> => {
+    return apiFetch('/api/lyrics/search', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ artist, title }),
+    });
+  },
+
+  suggestions: async (token: string, query: string): Promise<any> => {
+    return apiFetch('/api/lyrics/suggestions', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ query }),
+    });
+  },
+
+  batch: async (token: string, songs: { artist: string; title: string }[]): Promise<any> => {
+    return apiFetch('/api/lyrics/batch', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ songs }),
+    });
+  },
+};
+
+// ===== CPF API =====
+
+export const cpfApi = {
+  consultar: async (token: string, cpf: string): Promise<any> => {
+    return apiFetch('/api/cpf/consultar', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ cpf }),
+    });
+  },
+
+  validar: async (token: string, cpf: string): Promise<any> => {
+    return apiFetch('/api/cpf/validar', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ cpf }),
+    });
+  },
+
+  batch: async (token: string, cpfs: string[]): Promise<any> => {
+    return apiFetch('/api/cpf/batch', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ cpfs }),
+    });
+  },
+};
+
+// ===== VOCAL REMOVE API =====
+
+export const vocalRemoveApi = {
+  separateUrl: async (token: string, url: string): Promise<any> => {
+    return apiFetch('/api/vocalremove/separate-url', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ url }),
+    });
+  },
+};
+
+// ===== WHATSAPP API =====
+
+export const whatsappApi = {
+  activate: async (groupId: string, apiKey: string, groupName?: string, botNumber?: string): Promise<any> => {
+    return apiFetch('/api/whatsapp/activate', {
+      method: 'POST',
+      body: JSON.stringify({ group_id: groupId, api_key: apiKey, group_name: groupName, bot_number: botNumber }),
+    });
+  },
+
+  validate: async (groupId: string): Promise<any> => {
+    return apiFetch('/api/whatsapp/validate', {
+      method: 'POST',
+      body: JSON.stringify({ group_id: groupId }),
+    });
+  },
+
+  consume: async (groupId: string): Promise<any> => {
+    return apiFetch('/api/whatsapp/consume', {
+      method: 'POST',
+      body: JSON.stringify({ group_id: groupId }),
+    });
+  },
+
+  deactivate: async (groupId: string, apiKey: string): Promise<any> => {
+    return apiFetch('/api/whatsapp/deactivate', {
+      method: 'POST',
+      body: JSON.stringify({ group_id: groupId, api_key: apiKey }),
+    });
+  },
+
+  status: async (groupId: string): Promise<any> => {
+    return apiFetch(`/api/whatsapp/status/${groupId}`);
+  },
+};
+
+// ===== PAYMENT API =====
+
+export const paymentApi = {
+  mercadopago: async (token: string, data: { email: string; amount: number; description?: string; usuario_id: string }): Promise<any> => {
+    return apiFetch('/api/payment/mercadopago', {
+      method: 'POST',
+      token,
+      body: JSON.stringify(data),
+    });
+  },
+
+  mpesa: async (token: string, data: { valor: string; numero_celular: string; usuario_id: string }): Promise<any> => {
+    return apiFetch('/api/payment/mpesa', {
+      method: 'POST',
+      token,
+      body: JSON.stringify(data),
+    });
+  },
+
+  emola: async (token: string, data: { valor: string; numero_celular: string; usuario_id: string }): Promise<any> => {
+    return apiFetch('/api/payment/emola', {
+      method: 'POST',
+      token,
+      body: JSON.stringify(data),
+    });
+  },
+
+  getStatus: async (token: string, paymentId: string): Promise<any> => {
+    return apiFetch(`/api/payment/mercadopago/status/${paymentId}`, { token });
+  },
+
+  myPayments: async (token: string, page?: number, limit?: number, status?: string): Promise<any> => {
+    const params = new URLSearchParams();
+    if (page) params.set('page', String(page));
+    if (limit) params.set('limit', String(limit));
+    if (status) params.set('status', status);
+    const qs = params.toString();
+    return apiFetch(`/api/payment/my-payments${qs ? `?${qs}` : ''}`, { token });
+  },
+};
+
+// ===== TINA AI API =====
+
+export const tinaApi = {
+  newSession: async (token: string, sessionName?: string): Promise<any> => {
+    return apiFetch('/api/tina/session/new', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ session_name: sessionName }),
+    });
+  },
+
+  chat: async (token: string, sessionId: string, message: string): Promise<any> => {
+    return apiFetch('/api/tina/chat', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ session_id: sessionId, message }),
+    });
+  },
+
+  listSessions: async (token: string, limit?: number): Promise<any> => {
+    const qs = limit ? `?limit=${limit}` : '';
+    return apiFetch(`/api/tina/sessions${qs}`, { token });
+  },
+
+  getHistory: async (token: string, sessionId: string): Promise<any> => {
+    return apiFetch(`/api/tina/history/${sessionId}`, { token });
+  },
+
+  deleteSession: async (token: string, sessionId: string): Promise<any> => {
+    return apiFetch(`/api/tina/session/${sessionId}`, {
+      method: 'DELETE',
+      token,
+    });
+  },
+
+  getStats: async (token: string, sessionId: string): Promise<any> => {
+    return apiFetch(`/api/tina/stats/${sessionId}`, { token });
+  },
+};
+
+// ===== XVIDEOS API =====
+
+export const xvideosApi = {
+  search: async (token: string, query: string, options?: { page?: number; sort?: string; date?: string; duration?: string }): Promise<any> => {
+    return apiFetch('/api/xvideos/search', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ query, ...options }),
+    });
+  },
+
+  download: async (token: string, url: string): Promise<any> => {
+    return apiFetch('/api/xvideos/download', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ url }),
+    });
+  },
+
+  auto: async (token: string, query: string): Promise<any> => {
+    return apiFetch('/api/xvideos/auto', {
+      method: 'POST',
+      token,
+      body: JSON.stringify({ query }),
+    });
+  },
+};
+
+// ===== VALIDATE API =====
+
+export const validateApi = {
+  validateKey: async (apiKey: string): Promise<any> => {
+    return apiFetch('/api/validate/key', {
+      headers: { 'X-API-Key': apiKey },
+    });
   },
 };
 

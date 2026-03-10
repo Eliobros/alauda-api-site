@@ -33,21 +33,21 @@ export default function DocsIntroPage() {
             <div className="text-3xl mb-3">📥</div>
             <h3 className="text-lg font-semibold text-white mb-2">Downloads</h3>
             <p className="text-sm text-gray-400">
-              YouTube, TikTok, Instagram e Spotify
+              YouTube, TikTok, Instagram, Spotify, Facebook e XVideos
             </p>
           </div>
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
             <div className="text-3xl mb-3">🎼</div>
-            <h3 className="text-lg font-semibold text-white mb-2">Reconhecimento</h3>
+            <h3 className="text-lg font-semibold text-white mb-2">Serviços</h3>
             <p className="text-sm text-gray-400">
-              Identificação de músicas via Shazam
+              Shazam, Lyrics, Remove BG, Vocal Remover, CPF e Tina AI
             </p>
           </div>
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-            <div className="text-3xl mb-3">🖼️</div>
-            <h3 className="text-lg font-semibold text-white mb-2">Processamento</h3>
+            <div className="text-3xl mb-3">💳</div>
+            <h3 className="text-lg font-semibold text-white mb-2">Integrações</h3>
             <p className="text-sm text-gray-400">
-              Remoção de fundo de imagens com IA
+              WhatsApp, Pagamentos (M-Pesa, E-Mola, MercadoPago)
             </p>
           </div>
         </div>
