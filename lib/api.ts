@@ -1,7 +1,7 @@
 // lib/api.ts
 // Cliente para comunicação com a API
 
-const API_BASE_URL = 'https://alauda-api.topazioverse.com.br';
+const API_BASE_URL = 'https://alauda-api.onrender.com';
 
 interface FetchOptions extends RequestInit {
   token?: string;
