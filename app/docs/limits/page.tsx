@@ -151,7 +151,7 @@ X-RateLimit-Reset: 1635789600`}
             </p>
             <CodeBlock
               language="javascript"
-              code={`const response = await fetch('https://api.alauda.mz/api/...');
+              code={`const response = await fetch('https://alauda-api.mozhost.shop/api/...');
 const remaining = response.headers.get('X-RateLimit-Remaining');
 const reset = response.headers.get('X-RateLimit-Reset');
 
@@ -261,7 +261,7 @@ async function getCachedData(url) {
 // Uso
 const limiter = new RateLimiter(10, 15 * 60 * 1000); // 10 req/15min
 
-await limiter.throttle(() => fetch('https://api.alauda.mz/api/...'));`}
+await limiter.throttle(() => fetch('https://alauda-api.mozhost.shop/api/...'));`}
             />
           </div>
         </div>
@@ -315,7 +315,7 @@ await limiter.throttle(() => fetch('https://api.alauda.mz/api/...'));`}
         
         <CodeBlock
           language="bash"
-          code={`curl -X GET https://api.alauda.mz/api/keys/stats/summary \\
+          code={`curl -X GET https://alauda-api.mozhost.shop/api/keys/stats/summary \\
   -H "Authorization: Bearer seu_token_jwt"`}
         />
 

@@ -81,7 +81,7 @@ export default function DocsWhatsAppPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/whatsapp/activate \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/whatsapp/activate \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -164,7 +164,7 @@ export default function DocsWhatsAppPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/whatsapp/validate \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/whatsapp/validate \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -237,7 +237,7 @@ export default function DocsWhatsAppPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/whatsapp/consume \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/whatsapp/consume \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -321,7 +321,7 @@ export default function DocsWhatsAppPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/whatsapp/deactivate \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/whatsapp/deactivate \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -395,7 +395,7 @@ export default function DocsWhatsAppPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/whatsapp/status/120363012345678901@g.us" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/whatsapp/status/120363012345678901@g.us" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 

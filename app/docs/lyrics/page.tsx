@@ -69,7 +69,7 @@ export default function DocsLyricsPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/lyrics/search \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/lyrics/search \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -81,7 +81,7 @@ export default function DocsLyricsPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/lyrics/search', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/lyrics/search', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -172,7 +172,7 @@ console.log(data.data.lyrics);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/lyrics/suggestions \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/lyrics/suggestions \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -267,7 +267,7 @@ console.log(data.data.lyrics);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/lyrics/batch \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/lyrics/batch \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{

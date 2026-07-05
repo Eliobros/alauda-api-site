@@ -1,7 +1,7 @@
 // lib/api.ts
 // Cliente para comunicação com a API
 
-const API_BASE_URL = 'https://alauda-api.onrender.com';
+const API_BASE_URL = 'https://alauda-api.mozhost.shop';
 
 interface FetchOptions extends RequestInit {
   token?: string;
@@ -387,32 +387,47 @@ export const whatsappApi = {
 };
 
 // ===== PAYMENT API =====
+// mpesa, emola e mercadopago agora batem nas API Routes internas do Next.js
+// (/app/api/payment/[method]), que injetam a X-API-Key da Alauda no servidor.
+// A key nunca é exposta no bundle do cliente.
+
+async function localPaymentFetch<T>(
+  method: 'mpesa' | 'emola' | 'mercadopago',
+  token: string,
+  data: Record<string, unknown>
+): Promise<T> {
+  const res = await fetch(`/api/payment/${method}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await res.json();
+
+  if (!res.ok) {
+    throw new Error(json.error || json.message || 'Erro na requisição de pagamento');
+  }
+
+  return json;
+}
 
 export const paymentApi = {
   mercadopago: async (token: string, data: { email: string; amount: number; description?: string; usuario_id: string }): Promise<any> => {
-    return apiFetch('/api/payment/mercadopago', {
-      method: 'POST',
-      token,
-      body: JSON.stringify(data),
-    });
+    return localPaymentFetch('mercadopago', token, data);
   },
 
   mpesa: async (token: string, data: { valor: string; numero_celular: string; usuario_id: string }): Promise<any> => {
-    return apiFetch('/api/payment/mpesa', {
-      method: 'POST',
-      token,
-      body: JSON.stringify(data),
-    });
+    return localPaymentFetch('mpesa', token, data);
   },
 
   emola: async (token: string, data: { valor: string; numero_celular: string; usuario_id: string }): Promise<any> => {
-    return apiFetch('/api/payment/emola', {
-      method: 'POST',
-      token,
-      body: JSON.stringify(data),
-    });
+    return localPaymentFetch('emola', token, data);
   },
 
+  // Continuam batendo direto na Alauda API (usam só o JWT do usuário, não a X-API-Key da plataforma)
   getStatus: async (token: string, paymentId: string): Promise<any> => {
     return apiFetch(`/api/payment/mercadopago/status/${paymentId}`, { token });
   },

@@ -63,7 +63,7 @@ export default function DocsTinaPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/tina/session/new \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/tina/session/new \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -149,7 +149,7 @@ export default function DocsTinaPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/tina/chat \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/tina/chat \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -174,7 +174,7 @@ data = {
 }
 
 response = requests.post(
-    'https://api.alauda.mz/api/tina/chat',
+    'https://alauda-api.mozhost.shop/api/tina/chat',
     headers=headers,
     json=data
 )
@@ -224,7 +224,7 @@ print(result['data']['response'])`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/tina/sessions" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/tina/sessions" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -306,7 +306,7 @@ print(result['data']['response'])`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/tina/history/sess_abc123xyz" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/tina/history/sess_abc123xyz" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -385,7 +385,7 @@ print(result['data']['response'])`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X DELETE "https://api.alauda.mz/api/tina/session/sess_abc123xyz" \\
+          code={`curl -X DELETE "https://alauda-api.mozhost.shop/api/tina/session/sess_abc123xyz" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -419,7 +419,7 @@ print(result['data']['response'])`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/tina/stats/sess_abc123xyz" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/tina/stats/sess_abc123xyz" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 

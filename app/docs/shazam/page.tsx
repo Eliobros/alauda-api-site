@@ -85,7 +85,7 @@ export default function DocsShazamPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/shazam/identify \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/shazam/identify \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -F "audio=@/caminho/para/audio.mp3"`}
         />
@@ -96,7 +96,7 @@ export default function DocsShazamPage() {
           code={`const formData = new FormData();
 formData.append('audio', audioFile); // audioFile é um File object
 
-const response = await fetch('https://api.alauda.mz/api/shazam/identify', {
+const response = await fetch('https://alauda-api.mozhost.shop/api/shazam/identify', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui'
@@ -122,7 +122,7 @@ files = {
 }
 
 response = requests.post(
-    'https://api.alauda.mz/api/shazam/identify',
+    'https://alauda-api.mozhost.shop/api/shazam/identify',
     headers=headers,
     files=files
 )

@@ -63,7 +63,7 @@ export default function DocsSpotifyPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/spotify/search?query=Blinding Lights" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/spotify/search?query=Blinding Lights" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -147,7 +147,7 @@ export default function DocsSpotifyPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/spotify/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/spotify/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -158,7 +158,7 @@ export default function DocsSpotifyPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/spotify/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/spotify/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',

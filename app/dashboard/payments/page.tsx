@@ -24,15 +24,22 @@ const creditPackages = [
   { credits: 50000, price: 2000, currency: 'MZN', popular: false },
 ];
 
+const STEP_LABELS = ['Método', 'Dados', 'Confirmar'];
+
 export default function PaymentsPage() {
   const { user, token } = useAuth();
   const [activeTab, setActiveTab] = useState<'recharge' | 'history'>('recharge');
+
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [step, setStep] = useState(0); // 0 = método, 1 = dados, 2 = confirmar
+  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<'mpesa' | 'emola' | 'mercadopago'>('mpesa');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
+
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(false);
 
@@ -52,6 +59,42 @@ export default function PaymentsPage() {
     } finally {
       setLoadingHistory(false);
     }
+  };
+
+  const openModal = (pkgIdx: number) => {
+    setSelectedPackage(pkgIdx);
+    setPaymentMethod('mpesa');
+    setPhone('');
+    setEmail('');
+    setResult(null);
+    setStep(0);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedPackage(null);
+    setResult(null);
+    setStep(0);
+  };
+
+  const canGoNext = () => {
+    if (step === 0) return true; // método sempre selecionado
+    if (step === 1) {
+      if (paymentMethod === 'mpesa' || paymentMethod === 'emola') return phone.trim().length > 0;
+      return email.trim().length > 0;
+    }
+    return true;
+  };
+
+  const goNext = () => {
+    if (!canGoNext()) return;
+    setStep((s) => Math.min(s + 1, STEP_LABELS.length - 1));
+  };
+
+  const goBack = () => {
+    setResult(null);
+    setStep((s) => Math.max(s - 1, 0));
   };
 
   const handlePayment = async () => {
@@ -130,127 +173,26 @@ export default function PaymentsPage() {
           </div>
 
           {activeTab === 'recharge' ? (
-            <div className="space-y-8">
-              {/* Credit Packages */}
-              <div>
-                <h2 className="text-xl font-bold text-white mb-4">Escolha um pacote</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {creditPackages.map((pkg, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setSelectedPackage(idx)}
-                      className={`relative p-6 rounded-xl border-2 transition text-left ${
-                        selectedPackage === idx
-                          ? 'border-purple-500 bg-purple-500/10'
-                          : 'border-gray-800 bg-gray-900 hover:border-gray-600'
-                      }`}
-                    >
-                      {pkg.popular && (
-                        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">
-                          POPULAR
-                        </span>
-                      )}
-                      <p className="text-2xl font-bold text-white">{pkg.credits.toLocaleString()}</p>
-                      <p className="text-gray-400 text-sm">créditos</p>
-                      <p className="text-purple-400 font-bold mt-2">{pkg.price} {pkg.currency}</p>
-                    </button>
-                  ))}
-                </div>
+            <div>
+              <h2 className="text-xl font-bold text-white mb-4">Escolha um pacote</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {creditPackages.map((pkg, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => openModal(idx)}
+                    className={`relative p-6 rounded-xl border-2 transition text-left border-gray-800 bg-gray-900 hover:border-purple-500`}
+                  >
+                    {pkg.popular && (
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">
+                        POPULAR
+                      </span>
+                    )}
+                    <p className="text-2xl font-bold text-white">{pkg.credits.toLocaleString()}</p>
+                    <p className="text-gray-400 text-sm">créditos</p>
+                    <p className="text-purple-400 font-bold mt-2">{pkg.price} {pkg.currency}</p>
+                  </button>
+                ))}
               </div>
-
-              {/* Payment Method */}
-              {selectedPackage !== null && (
-                <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Método de pagamento</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <button
-                      onClick={() => setPaymentMethod('mpesa')}
-                      className={`p-4 rounded-xl border-2 transition ${
-                        paymentMethod === 'mpesa' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-900 hover:border-gray-600'
-                      }`}
-                    >
-                      <p className="text-white font-semibold">📱 M-Pesa</p>
-                      <p className="text-gray-400 text-sm">Vodacom (84x)</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentMethod('emola')}
-                      className={`p-4 rounded-xl border-2 transition ${
-                        paymentMethod === 'emola' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-900 hover:border-gray-600'
-                      }`}
-                    >
-                      <p className="text-white font-semibold">📱 E-Mola</p>
-                      <p className="text-gray-400 text-sm">Movitel (86x/87x)</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentMethod('mercadopago')}
-                      className={`p-4 rounded-xl border-2 transition ${
-                        paymentMethod === 'mercadopago' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-900 hover:border-gray-600'
-                      }`}
-                    >
-                      <p className="text-white font-semibold">💳 MercadoPago</p>
-                      <p className="text-gray-400 text-sm">PIX, Cartão, Boleto</p>
-                    </button>
-                  </div>
-
-                  {/* Payment Form */}
-                  <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-                    {(paymentMethod === 'mpesa' || paymentMethod === 'emola') ? (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Número de celular</label>
-                        <input
-                          type="text"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                          placeholder={paymentMethod === 'mpesa' ? '84xxxxxxx' : '86xxxxxxx'}
-                        />
-                      </div>
-                    ) : (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                          placeholder="seu@email.com"
-                        />
-                      </div>
-                    )}
-
-                    <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">Pacote</span>
-                        <span className="text-white">{creditPackages[selectedPackage].credits.toLocaleString()} créditos</span>
-                      </div>
-                      <div className="flex justify-between text-sm mt-2">
-                        <span className="text-gray-400">Método</span>
-                        <span className="text-white">{paymentMethod === 'mpesa' ? 'M-Pesa' : paymentMethod === 'emola' ? 'E-Mola' : 'MercadoPago'}</span>
-                      </div>
-                      <div className="flex justify-between mt-3 pt-3 border-t border-gray-700">
-                        <span className="text-white font-semibold">Total</span>
-                        <span className="text-purple-400 font-bold text-lg">{creditPackages[selectedPackage].price} {creditPackages[selectedPackage].currency}</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={handlePayment}
-                      disabled={loading}
-                      className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition disabled:opacity-50 text-lg"
-                    >
-                      {loading ? '⏳ Processando...' : `Pagar ${creditPackages[selectedPackage].price} ${creditPackages[selectedPackage].currency}`}
-                    </button>
-
-                    {result && (
-                      <div className={`mt-4 p-4 rounded-lg ${
-                        result.success ? 'bg-green-500/10 border border-green-500/50 text-green-400' : 'bg-red-500/10 border border-red-500/50 text-red-400'
-                      }`}>
-                        {result.message}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           ) : (
             /* Payment History */
@@ -292,6 +234,199 @@ export default function PaymentsPage() {
           )}
         </div>
       </div>
+
+      {/* MODAL */}
+      {modalOpen && selectedPackage !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          {/* Modal box */}
+          <div className="relative w-full max-w-lg bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800">
+              <h3 className="text-lg font-bold text-white">Recarregar créditos</h3>
+              <button
+                onClick={closeModal}
+                className="text-gray-400 hover:text-white text-xl leading-none"
+                aria-label="Fechar"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Progress bar */}
+            <div className="px-6 pt-4">
+              <div className="flex items-center gap-2 mb-2">
+                {STEP_LABELS.map((label, idx) => (
+                  <div key={label} className="flex-1 flex items-center gap-2">
+                    <div
+                      className={`h-2 flex-1 rounded-full transition ${
+                        idx <= step ? 'bg-purple-500' : 'bg-gray-800'
+                      }`}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-gray-500 mb-4">
+                {STEP_LABELS.map((label, idx) => (
+                  <span key={label} className={idx === step ? 'text-purple-400 font-semibold' : ''}>
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="px-6 pb-2 min-h-[220px]">
+              {/* STEP 0: Método */}
+              {step === 0 && (
+                <div className="space-y-3">
+                  <p className="text-sm text-gray-400 mb-2">
+                    Pacote: <span className="text-white font-semibold">{creditPackages[selectedPackage].credits.toLocaleString()} créditos</span> por{' '}
+                    <span className="text-purple-400 font-semibold">{creditPackages[selectedPackage].price} {creditPackages[selectedPackage].currency}</span>
+                  </p>
+
+                  <button
+                    onClick={() => setPaymentMethod('mpesa')}
+                    className={`w-full p-4 rounded-xl border-2 transition text-left ${
+                      paymentMethod === 'mpesa' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-950 hover:border-gray-600'
+                    }`}
+                  >
+                    <p className="text-white font-semibold">📱 M-Pesa</p>
+                    <p className="text-gray-400 text-sm">Vodacom (84x)</p>
+                  </button>
+
+                  <button
+                    onClick={() => setPaymentMethod('emola')}
+                    className={`w-full p-4 rounded-xl border-2 transition text-left ${
+                      paymentMethod === 'emola' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-950 hover:border-gray-600'
+                    }`}
+                  >
+                    <p className="text-white font-semibold">📱 E-Mola</p>
+                    <p className="text-gray-400 text-sm">Movitel (86x/87x)</p>
+                  </button>
+
+                  <button
+                    onClick={() => setPaymentMethod('mercadopago')}
+                    className={`w-full p-4 rounded-xl border-2 transition text-left ${
+                      paymentMethod === 'mercadopago' ? 'border-purple-500 bg-purple-500/10' : 'border-gray-800 bg-gray-950 hover:border-gray-600'
+                    }`}
+                  >
+                    <p className="text-white font-semibold">💳 MercadoPago</p>
+                    <p className="text-gray-400 text-sm">PIX, Cartão, Boleto</p>
+                  </button>
+                </div>
+              )}
+
+              {/* STEP 1: Dados */}
+              {step === 1 && (
+                <div>
+                  {(paymentMethod === 'mpesa' || paymentMethod === 'emola') ? (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Número de celular</label>
+                      <input
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        autoFocus
+                        className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder={paymentMethod === 'mpesa' ? '84xxxxxxx' : '86xxxxxxx'}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoFocus
+                        className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder="seu@email.com"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* STEP 2: Confirmação */}
+              {step === 2 && (
+                <div>
+                  <div className="p-4 bg-gray-800 rounded-lg">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Pacote</span>
+                      <span className="text-white">{creditPackages[selectedPackage].credits.toLocaleString()} créditos</span>
+                    </div>
+                    <div className="flex justify-between text-sm mt-2">
+                      <span className="text-gray-400">Método</span>
+                      <span className="text-white">{paymentMethod === 'mpesa' ? 'M-Pesa' : paymentMethod === 'emola' ? 'E-Mola' : 'MercadoPago'}</span>
+                    </div>
+                    <div className="flex justify-between text-sm mt-2">
+                      <span className="text-gray-400">{paymentMethod === 'mercadopago' ? 'Email' : 'Celular'}</span>
+                      <span className="text-white">{paymentMethod === 'mercadopago' ? email : phone}</span>
+                    </div>
+                    <div className="flex justify-between mt-3 pt-3 border-t border-gray-700">
+                      <span className="text-white font-semibold">Total</span>
+                      <span className="text-purple-400 font-bold text-lg">
+                        {creditPackages[selectedPackage].price} {creditPackages[selectedPackage].currency}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handlePayment}
+                    disabled={loading}
+                    className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition disabled:opacity-50 text-lg"
+                  >
+                    {loading ? '⏳ Processando...' : `Pagar ${creditPackages[selectedPackage].price} ${creditPackages[selectedPackage].currency}`}
+                  </button>
+
+                  {result && (
+                    <div className={`mt-4 p-4 rounded-lg ${
+                      result.success ? 'bg-green-500/10 border border-green-500/50 text-green-400' : 'bg-red-500/10 border border-red-500/50 text-red-400'
+                    }`}>
+                      {result.message}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Footer nav */}
+            {step !== 2 && (
+              <div className="flex items-center justify-between px-6 py-4 border-t border-gray-800 mt-4">
+                <button
+                  onClick={step === 0 ? closeModal : goBack}
+                  className="px-5 py-2 rounded-lg text-gray-400 hover:text-white transition"
+                >
+                  {step === 0 ? 'Cancelar' : '← Voltar'}
+                </button>
+                <button
+                  onClick={goNext}
+                  disabled={!canGoNext()}
+                  className="px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Avançar →
+                </button>
+              </div>
+            )}
+            {step === 2 && !result?.success && (
+              <div className="flex items-center justify-start px-6 py-4 border-t border-gray-800 mt-2">
+                <button
+                  onClick={goBack}
+                  className="px-5 py-2 rounded-lg text-gray-400 hover:text-white transition"
+                >
+                  ← Voltar
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </ProtectedRoute>
   );
 }

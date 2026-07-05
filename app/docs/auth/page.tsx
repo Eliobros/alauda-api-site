@@ -32,7 +32,7 @@ export default function DocsAuthPage() {
         <CodeBlock
           language="bash"
           title="Exemplo com cURL"
-          code={`curl -X POST https://api.alauda.mz/api/tiktok/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/tiktok/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -43,7 +43,7 @@ export default function DocsAuthPage() {
         <CodeBlock
           language="javascript"
           title="Exemplo com JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/tiktok/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/tiktok/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -73,7 +73,7 @@ data = {
 }
 
 response = requests.post(
-    'https://api.alauda.mz/api/tiktok/download',
+    'https://alauda-api.mozhost.shop/api/tiktok/download',
     headers=headers,
     json=data
 )

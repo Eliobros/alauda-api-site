@@ -63,7 +63,7 @@ export default function DocsTikTokPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/tiktok/info?url=https://tiktok.com/@user/video/123" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/tiktok/info?url=https://tiktok.com/@user/video/123" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -146,7 +146,7 @@ export default function DocsTikTokPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/tiktok/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/tiktok/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -169,7 +169,7 @@ data = {
 }
 
 response = requests.post(
-    'https://api.alauda.mz/api/tiktok/download',
+    'https://alauda-api.mozhost.shop/api/tiktok/download',
     headers=headers,
     json=data
 )

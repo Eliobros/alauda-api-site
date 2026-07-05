@@ -63,7 +63,7 @@ export default function DocsInstagramPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/instagram/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/instagram/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -74,7 +74,7 @@ export default function DocsInstagramPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/instagram/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/instagram/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',

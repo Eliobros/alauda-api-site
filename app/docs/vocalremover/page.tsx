@@ -63,7 +63,7 @@ export default function DocsVocalRemoverPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/vocalremove/separate \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/vocalremove/separate \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -F "audio=@musica.mp3"`}
         />
@@ -74,7 +74,7 @@ export default function DocsVocalRemoverPage() {
           code={`const formData = new FormData();
 formData.append('audio', fileInput.files[0]);
 
-const response = await fetch('https://api.alauda.mz/api/vocalremove/separate', {
+const response = await fetch('https://alauda-api.mozhost.shop/api/vocalremove/separate', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui'
@@ -163,7 +163,7 @@ console.log(data.data.stems);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/vocalremove/separate-url \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/vocalremove/separate-url \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -186,7 +186,7 @@ data = {
 }
 
 response = requests.post(
-    'https://api.alauda.mz/api/vocalremove/separate-url',
+    'https://alauda-api.mozhost.shop/api/vocalremove/separate-url',
     headers=headers,
     json=data
 )

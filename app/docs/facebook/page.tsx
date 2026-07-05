@@ -63,7 +63,7 @@ export default function DocsFacebookPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/facebook/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/facebook/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -74,7 +74,7 @@ export default function DocsFacebookPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/facebook/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/facebook/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -164,7 +164,7 @@ console.log(data.data.download_url_hd);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/facebook/info-only \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/facebook/info-only \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -250,7 +250,7 @@ console.log(data.data.download_url_hd);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/facebook/batch \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/facebook/batch \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{

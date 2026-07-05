@@ -107,7 +107,7 @@ export default function DocsRemoveBGPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/remove/background \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/remove/background \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -F "image=@/caminho/para/imagem.jpg"`}
         />
@@ -118,7 +118,7 @@ export default function DocsRemoveBGPage() {
           code={`const formData = new FormData();
 formData.append('image', imageFile); // imageFile é um File object
 
-const response = await fetch('https://api.alauda.mz/api/remove/background', {
+const response = await fetch('https://alauda-api.mozhost.shop/api/remove/background', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui'
@@ -208,7 +208,7 @@ console.log(data.data.download_url);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/remove/background-url \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/remove/background-url \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{

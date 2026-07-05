@@ -93,7 +93,7 @@ export default function DocsIntroPage() {
             </p>
             <CodeBlock
               language="bash"
-              code={`curl -X POST https://api.alauda.mz/api/youtube/download \\
+              code={`curl -X POST https://alauda-api.mozhost.shop/api/youtube/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -124,7 +124,7 @@ export default function DocsIntroPage() {
         <h2 className="text-2xl font-bold text-white mb-4">URL Base</h2>
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
           <code className="text-purple-400 font-mono">
-            https://api.alauda.mz
+            https://alauda-api.mozhost.shop
           </code>
         </div>
         <p className="text-sm text-gray-500 mt-2">

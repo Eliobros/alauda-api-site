@@ -63,7 +63,7 @@ export default function DocsYouTubePage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/youtube/info?url=https://youtube.com/watch?v=dQw4w9WgXcQ" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/youtube/info?url=https://youtube.com/watch?v=dQw4w9WgXcQ" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -153,7 +153,7 @@ export default function DocsYouTubePage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/youtube/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/youtube/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -166,7 +166,7 @@ export default function DocsYouTubePage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/youtube/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/youtube/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',

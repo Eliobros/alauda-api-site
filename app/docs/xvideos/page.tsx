@@ -87,7 +87,7 @@ export default function DocsXVideosPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/xvideos/search \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/xvideos/search \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -179,7 +179,7 @@ export default function DocsXVideosPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/xvideos/download \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/xvideos/download \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -190,7 +190,7 @@ export default function DocsXVideosPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/xvideos/download', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/xvideos/download', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -279,7 +279,7 @@ console.log(data.data.download_url);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/xvideos/auto \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/xvideos/auto \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{

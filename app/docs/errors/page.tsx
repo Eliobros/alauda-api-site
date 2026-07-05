@@ -252,7 +252,7 @@ export default function DocsErrorsPage() {
             <p className="text-green-400 text-sm font-semibold mb-2">Solução:</p>
             <CodeBlock
               language="bash"
-              code={`curl -X POST https://api.alauda.mz/api/... \\
+              code={`curl -X POST https://alauda-api.mozhost.shop/api/... \\
   -H "X-API-Key: sua_api_key_aqui" \\  ← Adicione isso
   -H "Content-Type: application/json"`}
             />
@@ -329,7 +329,7 @@ export default function DocsErrorsPage() {
           title="Exemplo de tratamento robusto"
           code={`async function downloadVideo(url) {
   try {
-    const response = await fetch('https://api.alauda.mz/api/youtube/download', {
+    const response = await fetch('https://alauda-api.mozhost.shop/api/youtube/download', {
       method: 'POST',
       headers: {
         'X-API-Key': process.env.API_KEY,

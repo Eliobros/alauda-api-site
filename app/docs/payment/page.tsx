@@ -81,7 +81,7 @@ export default function DocsPaymentPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/payment/mercadopago \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/payment/mercadopago \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -172,7 +172,7 @@ export default function DocsPaymentPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/payment/mpesa \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/payment/mpesa \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -185,7 +185,7 @@ export default function DocsPaymentPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/payment/mpesa', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/payment/mpesa', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -282,7 +282,7 @@ console.log(data.data.transaction_id);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/payment/emola \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/payment/emola \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -360,7 +360,7 @@ console.log(data.data.transaction_id);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/payment/mercadopago/status/mp_1234567890" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/payment/mercadopago/status/mp_1234567890" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 
@@ -401,7 +401,7 @@ console.log(data.data.transaction_id);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X GET "https://api.alauda.mz/api/payment/my-payments" \\
+          code={`curl -X GET "https://alauda-api.mozhost.shop/api/payment/my-payments" \\
   -H "X-API-Key: sua_api_key_aqui"`}
         />
 

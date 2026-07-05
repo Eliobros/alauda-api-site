@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
 
-const API_BASE_URL = 'https://alauda-api.topazioverse.com.br';
+const API_BASE_URL = 'https://alauda-api.mozhost.shop';
 
 interface Endpoint {
   name: string;

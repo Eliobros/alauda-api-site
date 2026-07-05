@@ -69,7 +69,7 @@ export default function DocsCPFPage() {
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/cpf/consultar \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/cpf/consultar \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -80,7 +80,7 @@ export default function DocsCPFPage() {
         <CodeBlock
           language="javascript"
           title="JavaScript (fetch)"
-          code={`const response = await fetch('https://api.alauda.mz/api/cpf/consultar', {
+          code={`const response = await fetch('https://alauda-api.mozhost.shop/api/cpf/consultar', {
   method: 'POST',
   headers: {
     'X-API-Key': 'sua_api_key_aqui',
@@ -170,7 +170,7 @@ console.log(data.data.nome_completo);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/cpf/validar \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/cpf/validar \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -254,7 +254,7 @@ console.log(data.data.nome_completo);`}
         <h3 className="text-lg font-semibold text-white mb-3">Exemplo de Requisição</h3>
         <CodeBlock
           language="bash"
-          code={`curl -X POST https://api.alauda.mz/api/cpf/batch \\
+          code={`curl -X POST https://alauda-api.mozhost.shop/api/cpf/batch \\
   -H "X-API-Key: sua_api_key_aqui" \\
   -H "Content-Type: application/json" \\
   -d '{
